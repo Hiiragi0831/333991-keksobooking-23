@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Den Glazunov](https://up.htmlacademy.ru/javascript/23/user/333991).
-* Наставник: `Неизвестно`.
+* Наставник: [Илья Барашков](https://htmlacademy.ru/profile/id379063).
 
 ---
 
