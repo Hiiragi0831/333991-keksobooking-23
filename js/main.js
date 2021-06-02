@@ -5,21 +5,30 @@
  * @returns {number} Целое число из диапазона "от...до"
  */
 function getRandomInteger(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (min - max + 1) + max);
+  if (min < 0 || max < 0) {
+    throw new Error('Число не может быть отрицательным');
+  }
+  if (min > max) {
+    throw new Error('Первое значение больше второго');
+  }
+  return Math.floor(min + Math.random() * (max + 1 - min));
 }
-getRandomInteger(50, 2);
-
+getRandomInteger(1, 3);
 /**
  *
  * @param min Число 1
  * @param max Число 2
- * @param col Количество знаков после запятой
- * @returns {string} Число с плавающей точкой из диапазона "от...до" с указанным "количеством знаков после запятой"
+ * @param fractionDigits Количество знаков после запятой
+ * @returns {number} Число с плавающей точкой из диапазона "от...до" с указанным "количеством знаков после запятой"
  */
-function getRandomNum(min, max, col) {
-  const randomNum = Math.random() * (min - max + 1) + max;
-  return randomNum.toFixed(col);
+function getRandomNumber(min, max, fractionDigits) {
+  if (min < 0 || max < 0) {
+    throw new Error('Число не может быть отрицательным');
+  }
+  if (min > max) {
+    throw new Error('Первое значение больше второго');
+  }
+  const randomNumber = min + Math.random() * (max - min);
+  return Number(randomNumber.toFixed(fractionDigits));
 }
-getRandomNum(1.1, 1.2, 4);
+getRandomNumber(1.1, 1.2, 4);
