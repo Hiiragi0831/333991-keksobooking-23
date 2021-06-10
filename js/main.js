@@ -1,25 +1,5 @@
-import { getRandomPositiveInteger } from '/js/utils/get-random-positive-integer.js';
-import { getRandomPositiveFloat } from '/js/utils/get-random-positive-float.js';
-
-/**
- * Функция для генерации url адресов для аватарок
- * @param num число для генерации количества url
- * @returns {[]} Возвращает массив в виде img/avatars/user{num}.png (img/avatars/user05.png)
- */
-function getAvatarUrls (num) {
-  let urlsAvatar = [];
-  for (let i = 1; i <= num; i++) {
-    let number = i;
-    if (number < 10) {
-      number = `0${  number}`;
-    }
-    const url = `img/avatars/user${  number  }.png`;
-    urlsAvatar = urlsAvatar.concat(url);
-  }
-  return urlsAvatar;
-}
-
-const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
+import {getRandomPositiveInteger} from '/js/utils/get-random-positive-integer.js';
+import {getRandomPositiveFloat} from '/js/utils/get-random-positive-float.js';
 
 const PLACEMENT_TYPE = [
   'palace',
@@ -29,13 +9,13 @@ const PLACEMENT_TYPE = [
   'hotel',
 ];
 
-const TIME_OF_CHECKIN = [
+const CHECKIN_TIME = [
   '12:00',
   '13:00',
   '14:00',
 ];
 
-const TIME_OF_CHECKOUT = [
+const CHECKOUT_TIME = [
   '12:00',
   '13:00',
   '14:00',
@@ -49,70 +29,83 @@ const FEATURES_OF_THE_PLACE = [
   'elevator',
   'conditioner',
 ];
-
-function getFeatures (features){
-  let featuresItems = [];
-  // Получаем случайное длину значений
-  const randomLenght = getRandomPositiveInteger(0, features.length - 1);
-  // Проверяем, соответствует ли массив длине случайного значения
-  if (featuresItems.length < randomLenght) {
-    for (let i = 0; i <= randomLenght; i++) {
-      //Получаем случайное значение из массива
-      const lengthOfFeatures = getRandomArrayElement(features);
-      // Проверяем содержит ли массив дублирующий элемент
-      if (featuresItems.includes(lengthOfFeatures)) {
-        featuresItems;
-      } else {
-        featuresItems = featuresItems.concat(lengthOfFeatures);
-      }
-    }
-  }
-  return featuresItems;
-}
-
-const PFOTOS_OF_OFFER = [
+const OFFER_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
-
-const PRICE_OF_PLACE_START = 1000;
-const PRICE_OF_PLACE_END = 100000;
-const ROMS_START = 1;
-const ROMS_END = 8;
-const GUEST_START = 1;
-const GUEST_END = 1;
+const PRICE_OF_PLACE_MIN = 1000;
+const PRICE_OF_PLACE_MAX = 100000;
+const ROMS_MIN = 1;
+const ROMS_MAX = 8;
+const GUEST_MIN = 1;
+const GUEST_MAX = 5;
 const DESCRIPTION_OFFER = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet blanditiis debitis dignissimos, distinctio expedita fugit, magni minima mollitia, nam nisi numquam odit officia quod saepe vero voluptatem? Cumque, voluptatem?';
 const TITLE_OFFER = 'Lorem ipsum dolor sit amet';
 const SIMILAR_OFFER_COUNT = 10;
 
-const lat = () => getRandomPositiveFloat(35.65000, 35.70000,5);
-const lng = () => getRandomPositiveFloat(139.70000,139.80000, 5);
-
-const demoItems = () => {
-  const locations = {
-    lat: lat(),
-    lng: lng(),
+function getAvatarUrls(count) {
+  const numbers = [];
+  for (let i = 1; i <= count; i++) {
+    numbers.push(i);
+  }
+  return function() {
+    const index = getRandomPositiveInteger(0, numbers.length -1);
+    const number = numbers[index];
+    const userIndex = number < 10 ? `0${number}` : number;
+    numbers.splice(index, 1);
+    return `img/avatars/user${userIndex}.png`;
   };
-  const ofers = {
+}
+const avatarUrls = getAvatarUrls(SIMILAR_OFFER_COUNT);
+
+function getRandomArrayElement(elements) {
+  return elements[getRandomPositiveInteger(0, elements.length - 1)];
+}
+
+function getRandomElements(elements) {
+  const elementsCopy = [...elements];
+  const randomLength = getRandomPositiveInteger(1, elementsCopy.length);
+  const resultElements = [];
+
+  for (let i = 0; i < randomLength; i++) {
+    const index = getRandomPositiveInteger(0, elementsCopy.length - 1);
+    resultElements.push(elementsCopy[index]);
+    elementsCopy.splice(index, 1);
+  }
+  return resultElements;
+}
+
+function demoItems() {
+  const locations = {
+    lat: getRandomPositiveFloat(35.65000, 35.70000,5),
+    lng: getRandomPositiveFloat(139.70000,139.80000, 5),
+  };
+  const offer = {
     title: TITLE_OFFER,
     address: [locations.lat, locations.lng],
-    price: getRandomPositiveInteger(PRICE_OF_PLACE_START, PRICE_OF_PLACE_END),
+    price: getRandomPositiveInteger(PRICE_OF_PLACE_MIN, PRICE_OF_PLACE_MAX),
     type: getRandomArrayElement(PLACEMENT_TYPE),
-    rooms: getRandomPositiveInteger(ROMS_START, ROMS_END),
-    guests: getRandomPositiveInteger(GUEST_START, GUEST_END),
-    checkin: getRandomArrayElement(TIME_OF_CHECKIN),
-    checkout: getRandomArrayElement(TIME_OF_CHECKOUT),
-    features: getFeatures(FEATURES_OF_THE_PLACE),
+    rooms: getRandomPositiveInteger(ROMS_MIN, ROMS_MAX),
+    guests: getRandomPositiveInteger(GUEST_MIN, GUEST_MAX),
+    checkin: getRandomArrayElement(CHECKIN_TIME),
+    checkout: getRandomArrayElement(CHECKOUT_TIME),
+    features: getRandomElements(FEATURES_OF_THE_PLACE),
     description: DESCRIPTION_OFFER,
-    photos: getRandomArrayElement(PFOTOS_OF_OFFER),
+    photos: getRandomArrayElement(OFFER_PHOTOS),
   };
-  const authors = {
-    avatar: getRandomArrayElement(getAvatarUrls(10)),
+  const author = {
+    avatar: avatarUrls(),
   };
-  return {locations, ofers, authors};
-};
+  return {locations, offer, author};
+}
 
-const similarDemoItems = new Array(SIMILAR_OFFER_COUNT).fill(null).map(() => demoItems());
+function getOffers(count) {
+  const offers = [];
+  for (let i = 0; i < count; i++) {
+    offers.push(demoItems());
+  }
+  return offers;
+}
 
-console.log(similarDemoItems);
+console.log(getOffers(SIMILAR_OFFER_COUNT));
