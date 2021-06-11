@@ -83,29 +83,4 @@ function getRandomArrayElement(elements) {
   return elements[getRandomPositiveInteger(0, elements.length - 1)];
 }
 
-/**
- * Функция для генерации ссылок
- * @param count Количество ссылок
- * @returns {function(): string}
- */
-function getAvatarUrls(count) {
-  const numbers = [];
-  for (let i = 1; i <= count; i++) {
-    //Заполняем массив числами
-    numbers.push(i);
-  }
-  return function() {
-    //Берем случайный элемент массива
-    const index = getRandomPositiveInteger(0, numbers.length -1);
-    //присваиваем число переменной
-    const number = numbers[index];
-    //Проверяем, если он меньше 10 до приписываем ему 0 перед числом 05, 06 и т.д.
-    const userIndex = number < 10 ? `0${number}` : number;
-    //удаляем случайный элемент из массива
-    numbers.splice(index, 1);
-    //возвращаем сгенерированный url со случайным числом
-    return `img/avatars/user${userIndex}.png`;
-  };
-}
-
-export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getRandomElements, getAvatarUrls};
+export {getRandomPositiveInteger, getRandomPositiveFloat, getRandomArrayElement, getRandomElements};

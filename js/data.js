@@ -1,4 +1,4 @@
-import {getRandomPositiveFloat, getRandomPositiveInteger, getRandomArrayElement, getRandomElements, getAvatarUrls} from './utils.js';
+import {getRandomPositiveFloat, getRandomPositiveInteger, getRandomArrayElement, getRandomElements} from './utils.js';
 
 const PLACEMENT_TYPE = [
   'palace',
@@ -46,6 +46,31 @@ const LOCATION_LAT_MAX = 35.70000;
 const LOCATION_DIGITS = 5;
 const LOCATION_LNG_MIN = 35.65000;
 const LOCATION_LNG_MAX = 35.70000;
+
+/**
+ * Функция для генерации ссылок
+ * @param count Количество ссылок
+ * @returns {function(): string}
+ */
+function getAvatarUrls(count) {
+  const numbers = [];
+  for (let i = 1; i <= count; i++) {
+    //Заполняем массив числами
+    numbers.push(i);
+  }
+  return function() {
+    //Берем случайный элемент массива
+    const index = getRandomPositiveInteger(0, numbers.length -1);
+    //присваиваем число переменной
+    const number = numbers[index];
+    //Проверяем, если он меньше 10 до приписываем ему 0 перед числом 05, 06 и т.д.
+    const userIndex = number < 10 ? `0${number}` : number;
+    //удаляем случайный элемент из массива
+    numbers.splice(index, 1);
+    //возвращаем сгенерированный url со случайным числом
+    return `img/avatars/user${userIndex}.png`;
+  };
+}
 
 function getOffers(count) {
   const offers = [];
