@@ -1,4 +1,3 @@
-import {getOffers} from './utils.js';
-import {SIMILAR_OFFER_COUNT} from './data.js';
+import {getOffers} from './data.js';
 
-console.log(getOffers(SIMILAR_OFFER_COUNT));
+getOffers(10);
