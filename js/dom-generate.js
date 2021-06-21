@@ -3,7 +3,7 @@ const template = cardTemplate.querySelector('.popup');
 
 const content = document.querySelector('#map-canvas');
 const fragment = document.createDocumentFragment();
-const placeTypeMaping = {
+const placeTypeMapping = {
   palace: 'Дворец',
   flat: 'Квартира',
   house: 'Дом',
@@ -11,29 +11,29 @@ const placeTypeMaping = {
   hotel: 'Отель',
 };
 
-function hideBlock (block) {
-  block.remove();
-  // если сделать block.hidden то стили мешаются и блок все равно светится, но по заданию я не могу вмешиватся в шаблон
+function hideElement (element) {
+  element.hidden = true; // normalize.css:78 display none без !important; Соответственно style.css:779 важнее и по этому display: block;
+  element.style.display = 'none'; // задал стиль через js
 }
 
-function generateImg (array) {
-  if (array.length === 0) {
+function generateImgElements (images) {
+  if (images.length === 0) {
     return false;
   }
-  const images = document.createDocumentFragment();
-  for (let i = 0; i <= array.length - 1; i++) {
+  const image = document.createDocumentFragment();
+  for (let i = 0; i <= images.length - 1; i++) {
     const img = document.createElement('img');
     img.setAttribute('width', 40);
     img.setAttribute('height', 40);
     img.classList.add('popup__photo');
-    img.src = array[i];
-    images.appendChild(img);
+    img.src = images[i];
+    image.appendChild(img);
   }
-  return images;
+  return image;
 }
 
-function genereteDomElements(array) {
-  for (let i = 0; i < array.length; i++) {
+function genereteDomElements(offers) {
+  for (let i = 0; i < offers.length; i++) {
     const element = template.cloneNode(true);
     const popupTitle = element.querySelector('.popup__title');
     const popupTextAddress = element.querySelector('.popup__text--address');
@@ -45,26 +45,64 @@ function genereteDomElements(array) {
     const popupType = element.querySelector('.popup__type');
     const popupPhotos = element.querySelector('.popup__photos');
     const popupFeatures = element.querySelector('.popup__features');
-    const modifiers = array[i].offer.features.map((feature) => `popup__feature--${feature}`);
+    const modifiers = offers[i].offer.features.map((feature) => `popup__feature--${feature}`);
 
-    popupTitle.textContent = array[i].offer.title || hideBlock(popupTitle);
-    popupTextAddress.textContent = array[i].offer.address || hideBlock(popupTextAddress);
-    popupTextPrice.textContent = `${array[i].offer.price} ₽/ночь` || hideBlock(popupTextPrice);
-    popupTextCapacity.textContent = `${array[i].offer.rooms} комнаты для  ${array[i].offer.guests} гостей` || hideBlock(popupTextCapacity);
-    popupTextTime.textContent = `Заезд после ${array[i].offer.checkin}, выезд до ${array[i].offer.checkout}` || hideBlock(popupTextTime);
-    popupDescription.textContent = array[i].offer.description || hideBlock(popupDescription);
-    popupAvatar.src = array[i].author.avatar || hideBlock(popupAvatar);
-
-    popupType.textContent = placeTypeMaping[array[i].offer.type] || hideBlock(popupType);
+    if (offers[i].offer.title) {
+      popupTitle.textContent = offers[i].offer.title;
+    } else {
+      hideElement(popupTitle);
+    }
+    if (offers[i].offer.address) {
+      popupTextAddress.textContent = offers[i].offer.address;
+    } else {
+      hideElement(popupTitle);
+    }
+    if (offers[i].offer.price) {
+      popupTextPrice.textContent = `${offers[i].offer.price} ₽/ночь`;
+    } else {
+      hideElement(popupTextPrice);
+    }
+    if (offers[i].offer.rooms && offers[i].offer.guests) {
+      popupTextCapacity.textContent = `${offers[i].offer.rooms} комнаты для  ${offers[i].offer.guests} гостей`;
+    } else {
+      hideElement(popupTextCapacity);
+    }
+    if (offers[i].offer.checkin && offers[i].offer.checkout) {
+      popupTextTime.textContent = `Заезд после ${offers[i].offer.checkin}, выезд до ${offers[i].offer.checkout}`;
+    } else {
+      hideElement(popupTextTime);
+    }
+    if (offers[i].offer.description) {
+      popupDescription.textContent = offers[i].offer.description;
+    } else {
+      hideElement(popupDescription);
+    }
+    if (offers[i].author.avatar) {
+      popupAvatar.src = offers[i].author.avatar;
+    } else {
+      hideElement(popupAvatar);
+    }
+    if (offers[i].offer.type) {
+      popupType.textContent = placeTypeMapping[offers[i].offer.type];
+    } else {
+      hideElement(popupType);
+    }
     popupPhotos.innerHTML = '';
-    popupPhotos.appendChild(generateImg(array[i].offer.photos) || hideBlock(popupPhotos));
-    popupFeatures.querySelectorAll('.popup__feature').forEach((item) => {
-      const modfier = item.classList[1];
-      if (!modifiers.includes(modfier)) {
-        item.remove();
-      }
-    });
-
+    if (offers[i].offer.photos) {
+      popupPhotos.appendChild(generateImgElements(offers[i].offer.photos));
+    } else {
+      hideElement(popupPhotos);
+    }
+    if (offers[i].offer.features) {
+      popupFeatures.querySelectorAll('.popup__feature').forEach((item) => {
+        const modifier = item.classList[1];
+        if (!modifiers.includes(modifier)) {
+          item.remove();
+        }
+      });
+    } else {
+      hideElement(popupFeatures);
+    }
     fragment.appendChild(element); // Складываем созданные элементы в "коробочку"
   }
   content.appendChild(fragment); // И только в конце отрисовываем всё из "коробочки"
