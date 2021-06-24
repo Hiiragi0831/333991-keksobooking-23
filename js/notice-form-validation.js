@@ -13,7 +13,8 @@ const noticeFormTimein = noticeForm.querySelector('#timein');
 const noticeFormTimeout = noticeForm.querySelector('#timeout');
 const noticeFormRoomNumber = noticeForm.querySelector('#room_number');
 const noticeFormCapacity = noticeForm.querySelector('#capacity');
-
+const noticeFormType = noticeForm.querySelector('#type');
+let minPrice = 0;
 
 // Запрещаем пользователю вводить данные
 function setDisabledAddress () {
@@ -45,6 +46,8 @@ function setValidatePrice () {
 
     if (valueInput > MAX_PRICE) {
       noticeFormPrice.setCustomValidity(`Цена не может быть больше ${ MAX_PRICE } руб.`);
+    } else if (valueInput < minPrice) {
+      noticeFormPrice.setCustomValidity(`Цена не может быть меньше ${ minPrice } руб.`);
     } else {
       noticeFormPrice.setCustomValidity('');
     }
@@ -54,6 +57,7 @@ function setValidatePrice () {
 }
 
 function setSynchronizationTimeinTimeout () {
+  noticeFormTimeout.value = noticeFormTimein.value;
   noticeFormTimein.addEventListener('change', () => {
     noticeFormTimeout.value = noticeFormTimein.value;
   });
@@ -89,6 +93,25 @@ function setSynchronizationRoomCapacity () {
   noticeFormCapacity.addEventListener('input', () => {
     setConditionsReview();
   });
+  setConditionsReview();
+}
+
+function setMinPrice () {
+  function validate () {
+    if (noticeFormType.value === 'bungalow') {
+      minPrice = 0;
+    } else if (noticeFormType.value === 'flat') {
+      minPrice = 1000;
+    } else if (noticeFormType.value === 'hotel') {
+      minPrice = 3000;
+    } else if (noticeFormType.value === 'house') {
+      minPrice = 5000;
+    } else if (noticeFormType.value === 'palace') {
+      minPrice = 10000;
+    }
+  }
+  noticeFormType.addEventListener('change', validate);
+  validate();
 }
 
 function validateForm () {
@@ -97,6 +120,7 @@ function validateForm () {
   setValidatePrice();
   setSynchronizationTimeinTimeout();
   setSynchronizationRoomCapacity();
+  setMinPrice();
 }
 
 export {validateForm};
