@@ -44,8 +44,8 @@ const TITLE_OFFER = 'Lorem ipsum dolor sit amet';
 const LOCATION_LAT_MIN = 35.65000;
 const LOCATION_LAT_MAX = 35.70000;
 const LOCATION_DIGITS = 5;
-const LOCATION_LNG_MIN = 35.65000;
-const LOCATION_LNG_MAX = 35.70000;
+const LOCATION_LNG_MIN = 139.65000;
+const LOCATION_LNG_MAX = 139.70000;
 
 /**
  * Функция для генерации ссылок
