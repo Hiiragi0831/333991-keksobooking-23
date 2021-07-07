@@ -42,7 +42,6 @@ function escapeEvent (element) {
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
-      console.log('Esc');
       element.remove();
     }
   }, {once: true});
