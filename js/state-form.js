@@ -3,6 +3,8 @@ const noticeFormInputs = noticeForm.querySelectorAll('input');
 const noticeFormSelects = noticeForm.querySelectorAll('select');
 const noticeFormTextarea = noticeForm.querySelector('#description');
 const noticeFormButtons = noticeForm.querySelectorAll('button');
+const noticeFormAddress = noticeForm.querySelector('#address');
+const buttonFormReset = document.querySelector('.ad-form__reset');
 
 const mapFilters = document.querySelector('.map__filters');
 const mapFiltersSelects = mapFilters.querySelectorAll('select');
@@ -39,6 +41,15 @@ function unDisabledForm () {
   mapFilters.classList.remove('map__filters--disabled');
   unDisabledItems(mapFiltersSelects);
   unDisabledItems(mapFiltersInputs);
+  noticeFormAddress.setAttribute('readonly', 'readonly');
 }
 
-export {disabledForm, unDisabledForm};
+function clearForm () {
+  buttonFormReset.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    noticeForm.reset();
+    mapFilters.reset();
+  });
+}
+
+export {disabledForm, unDisabledForm, clearForm};

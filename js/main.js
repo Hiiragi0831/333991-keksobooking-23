@@ -1,9 +1,20 @@
-import {getOffers} from './data.js';
-import {disabledForm} from './state-form.js';
+import {clearForm, disabledForm} from './state-form.js';
 import {validateForm} from './notice-form-validation.js';
 import {getMap} from './map.js';
+import {getData} from './api.js';
+import {messageMapError} from './modal.js';
+import {setUserFormSubmit} from './form-submit.js';
 
-const SIMILAR_OFFER_COUNT = 10;
 disabledForm();
-getMap(getOffers(SIMILAR_OFFER_COUNT));
+getData(
+  (points) => {
+    getMap(points);
+  },
+  (err) => {
+    messageMapError(err);
+    getMap();
+  });
 validateForm();
+setUserFormSubmit();
+clearForm();
+
