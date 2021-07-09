@@ -44,7 +44,11 @@ function unDisabledForm () {
   noticeFormAddress.setAttribute('readonly', 'readonly');
 }
 
-function clearForm () {
+function clickClearForm () {
+  document.querySelector('.ad-form__reset').click();
+}
+
+function buttonClearForm () {
   buttonFormReset.addEventListener('click', (evt) => {
     evt.preventDefault();
     noticeForm.reset();
@@ -52,4 +56,4 @@ function clearForm () {
   });
 }
 
-export {disabledForm, unDisabledForm, clearForm};
+export {disabledForm, unDisabledForm, clickClearForm, buttonClearForm};

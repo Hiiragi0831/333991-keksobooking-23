@@ -1,4 +1,4 @@
-import {clearForm, disabledForm} from './state-form.js';
+import {buttonClearForm, disabledForm} from './state-form.js';
 import {validateForm} from './notice-form-validation.js';
 import {getMap} from './map.js';
 import {getData} from './api.js';
@@ -16,5 +16,4 @@ getData(
   });
 validateForm();
 setUserFormSubmit();
-clearForm();
-
+buttonClearForm();

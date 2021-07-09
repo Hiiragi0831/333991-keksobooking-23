@@ -1,3 +1,5 @@
+import {clickClearForm} from './state-form.js';
+
 function getData (onSuccess, onError) {
   return fetch(
     'https://23.javascript.pages.academy/keksobooking/data',
@@ -32,7 +34,7 @@ function sendData (onSuccess, onError, body) {
     .then((response) => {
       if (response.ok) {
         onSuccess();
-        document.querySelector('.ad-form__reset').click();
+        clickClearForm();
       } else {
         onError('Не удалось отправить форму. Попробуйте ещё раз');
       }
