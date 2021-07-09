@@ -18,7 +18,7 @@ let minPrice = 0;
 
 // Запрещаем пользователю вводить данные
 function setDisabledAddress () {
-  noticeFormAddress.setAttribute('disabled', 'disabled');
+  noticeFormAddress.setAttribute('readonly', 'readonly');
 }
 
 // Валидатор заголовка

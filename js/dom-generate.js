@@ -42,7 +42,6 @@ function genereteDomElements(offers) {
   const popupType = element.querySelector('.popup__type');
   const popupPhotos = element.querySelector('.popup__photos');
   const popupFeatures = element.querySelector('.popup__features');
-  const modifiers = offers.offer.features.map((feature) => `popup__feature--${feature}`);
 
   if (offers.offer.title) {
     popupTitle.textContent = offers.offer.title;
@@ -91,6 +90,7 @@ function genereteDomElements(offers) {
     hideElement(popupPhotos);
   }
   if (offers.offer.features) {
+    const modifiers = offers.offer.features.map((feature) => `popup__feature--${feature}`);
     popupFeatures.querySelectorAll('.popup__feature').forEach((item) => {
       const modifier = item.classList[1];
       if (!modifiers.includes(modifier)) {
