@@ -34,10 +34,10 @@ function getMarkerRank (advertisement) {
   if (getAdvertisementPriceValue(advertisement.offer.price) === housingPrice.value) {
     rank += 1;
   }
-  if (advertisement.offer.rooms === housingRooms.value) {
+  if (advertisement.offer.rooms === Number(housingRooms.value)) {
     rank += 1;
   }
-  if (advertisement.offer.guests === housingGuests.value) {
+  if (advertisement.offer.guests === Number(housingGuests.value)) {
     rank += 1;
   }
   for (const selectedFeature of selectedFeatures) {
