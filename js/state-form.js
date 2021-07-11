@@ -1,3 +1,5 @@
+import {TOKYO_LAT, TOKYO_LNG} from './map.js';
+
 const noticeForm = document.querySelector('.ad-form');
 const noticeFormInputs = noticeForm.querySelectorAll('input');
 const noticeFormSelects = noticeForm.querySelectorAll('select');
@@ -20,40 +22,46 @@ function unDisabledItems (items) {
     items[i].disabled = false;
   }
 }
-
-function disabledForm () {
-  noticeForm.classList.add('ad-form--disabled');
-  disabledItems(noticeFormInputs);
-  disabledItems(noticeFormSelects);
-  noticeFormTextarea.disabled = true;
-  disabledItems(noticeFormButtons);
+function disabledFormMapFilters () {
   mapFilters.classList.add('map__filters--disabled');
   disabledItems(mapFiltersSelects);
   disabledItems(mapFiltersInputs);
 }
 
-function unDisabledForm () {
+function disabledNoticeForms () {
+  noticeForm.classList.add('ad-form--disabled');
+  disabledItems(noticeFormInputs);
+  disabledItems(noticeFormSelects);
+  noticeFormTextarea.disabled = true;
+  disabledItems(noticeFormButtons);
+}
+
+function unDisabledFormMapFilters () {
+  mapFilters.classList.remove('map__filters--disabled');
+  unDisabledItems(mapFiltersSelects);
+  unDisabledItems(mapFiltersInputs);
+}
+
+function unDisabledNoticeForms () {
   noticeForm.classList.remove('ad-form--disabled');
   unDisabledItems(noticeFormInputs);
   unDisabledItems(noticeFormSelects);
   noticeFormTextarea.disabled = false;
   unDisabledItems(noticeFormButtons);
-  mapFilters.classList.remove('map__filters--disabled');
-  unDisabledItems(mapFiltersSelects);
-  unDisabledItems(mapFiltersInputs);
   noticeFormAddress.setAttribute('readonly', 'readonly');
 }
 
-function clickClearForm () {
+function clearForms () {
   document.querySelector('.ad-form__reset').click();
 }
 
-function buttonClearForm () {
+function buttonClearForms () {
   buttonFormReset.addEventListener('click', (evt) => {
     evt.preventDefault();
     noticeForm.reset();
     mapFilters.reset();
+    noticeFormAddress.value = `${TOKYO_LAT}, ${TOKYO_LNG}`;
   });
 }
 
-export {disabledForm, unDisabledForm, clickClearForm, buttonClearForm};
+export {clearForms, buttonClearForms, disabledNoticeForms, disabledFormMapFilters, unDisabledFormMapFilters, unDisabledNoticeForms};
