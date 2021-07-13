@@ -36,8 +36,6 @@ function messageMapError (message) {
   setTimeout(removeElement,1500, 'modal-error');
 }
 
-
-// Слушаем Esc
 function escapeEvent (element) {
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
@@ -47,7 +45,6 @@ function escapeEvent (element) {
   }, {once: true});
 }
 
-// Удаляем сообщение если произвольно кликнули на экран и удаляем прослушку ESC
 function messageClose (element) {
   element.addEventListener('click', () => {
     element.remove();
@@ -55,7 +52,6 @@ function messageClose (element) {
   document.removeEventListener('keydown', escapeEvent);
 }
 
-// Показываем сообщение об ошибке
 function messageError (text) {
   const element = errorTemplateClass.cloneNode(true);
   const messageTitle = element.querySelector('.error__message');
@@ -73,7 +69,6 @@ function messageError (text) {
   escapeEvent(element);
 }
 
-// Показываем сообщение об успехе
 function messageSuccess (text) {
   const element = successTemplateClass.cloneNode(true);
   const messageTitle = element.querySelector('.success__message');

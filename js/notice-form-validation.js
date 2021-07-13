@@ -14,6 +14,7 @@ const noticeFormTimeout = noticeForm.querySelector('#timeout');
 const noticeFormRoomNumber = noticeForm.querySelector('#room_number');
 const noticeFormCapacity = noticeForm.querySelector('#capacity');
 const noticeFormType = noticeForm.querySelector('#type');
+
 let minPrice = 0;
 
 // Запрещаем пользователю вводить данные
