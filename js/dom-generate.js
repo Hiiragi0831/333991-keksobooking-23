@@ -30,7 +30,7 @@ function generateImgElements (images) {
   return image;
 }
 
-function genereteDomElements(offers) {
+function generateDomElements(offers) {
   const element = template.cloneNode(true);
   const popupTitle = element.querySelector('.popup__title');
   const popupTextAddress = element.querySelector('.popup__text--address');
@@ -103,4 +103,4 @@ function genereteDomElements(offers) {
   return element;
 }
 
-export {genereteDomElements};
+export {generateDomElements};

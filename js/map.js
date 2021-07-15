@@ -1,5 +1,5 @@
 import {unDisabledFormMapFilters, unDisabledNoticeForms} from './state-form.js';
-import {genereteDomElements} from './dom-generate.js';
+import {generateDomElements} from './dom-generate.js';
 import {getData} from './api.js';
 import {buttonFilterReset, formFilterChange, renderSimilarList} from './similar-list.js';
 import {messageMapError} from './modal.js';
@@ -35,7 +35,7 @@ function createMarker (point) {
   marker
     .addTo(markerGroup)
     .bindPopup(
-      genereteDomElements(point),
+      generateDomElements(point),
       {
         keepInView: true,
       },

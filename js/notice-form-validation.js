@@ -17,12 +17,10 @@ const noticeFormType = noticeForm.querySelector('#type');
 
 let minPrice = 0;
 
-// Запрещаем пользователю вводить данные
 function setDisabledAddress () {
   noticeFormAddress.setAttribute('readonly', 'readonly');
 }
 
-// Валидатор заголовка
 function setValidateTitle () {
   noticeFormTitle.addEventListener('input', () => {
     const valueLength = noticeFormTitle.value.length;
@@ -39,8 +37,6 @@ function setValidateTitle () {
   });
 }
 
-
-// Валидатор цены
 function setValidatePrice () {
   noticeFormPrice.addEventListener('input', () => {
     const valueInput = noticeFormPrice.value;
