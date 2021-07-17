@@ -57,7 +57,7 @@ function clearForms() {
   document.querySelector('.ad-form__reset').click();
 }
 
-function buttonClearForms() {
+function clearFormsButton() {
   buttonFormReset.addEventListener('click', (evt) => {
     evt.preventDefault();
     noticeForm.reset();
@@ -68,7 +68,7 @@ function buttonClearForms() {
 
 export {
   clearForms,
-  buttonClearForms,
+  clearFormsButton,
   disabledNoticeForms,
   disabledFormMapFilters,
   unDisabledFormMapFilters,

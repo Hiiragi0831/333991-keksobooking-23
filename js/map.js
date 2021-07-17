@@ -1,8 +1,8 @@
 import {unDisabledFormMapFilters, unDisabledNoticeForms} from './state-form.js';
 import {generateDomElements} from './dom-generate.js';
 import {getData} from './api.js';
-import {buttonFilterReset, formFilterChange, renderSimilarList} from './similar-list.js';
-import {messageMapError} from './modal.js';
+import {resetFilterButton, formChangeFilter, renderSimilarList} from './similar-list.js';
+import {mapErrorMessage} from './modal.js';
 
 const inputAddress = document.querySelector('#address');
 const buttonFormReset = document.querySelector('.ad-form__reset');
@@ -62,17 +62,17 @@ function getMap() {
       (points) => {
         addMarkers(renderSimilarList(points));
         unDisabledFormMapFilters();
-        formFilterChange(() => {
+        formChangeFilter(() => {
           clearMarkers();
           addMarkers(renderSimilarList(points));
         });
-        buttonFilterReset(() => {
+        resetFilterButton(() => {
           clearMarkers();
           addMarkers(renderSimilarList(points));
         });
       },
       (err) => {
-        messageMapError(err);
+        mapErrorMessage(err);
       });
   });
   map.setView({

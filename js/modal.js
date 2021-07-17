@@ -11,7 +11,7 @@ function removeElement(id) {
   return elem.parentNode.removeChild(elem);
 }
 
-function messageMapError(message) {
+function mapErrorMessage(message) {
   const map = document.querySelector('.map');
   const modal = document.createElement('div');
   const paragraph = document.createElement('p');
@@ -33,14 +33,14 @@ function escapeEvent(element) {
   }, {once: true});
 }
 
-function messageClose(element) {
+function closeMessage(element) {
   element.addEventListener('click', () => {
     element.remove();
   });
   document.removeEventListener('keydown', escapeEvent);
 }
 
-function messageError(text) {
+function errorMessage(text) {
   const element = errorTemplateClass.cloneNode(true);
   const messageTitle = element.querySelector('.error__message');
   const messageButton = element.querySelector('.error__button');
@@ -53,11 +53,11 @@ function messageError(text) {
   });
 
   document.addEventListener('keydown', escapeEvent);
-  messageClose(element);
+  closeMessage(element);
   escapeEvent(element);
 }
 
-function messageSuccess(text) {
+function successMessage(text) {
   const element = successTemplateClass.cloneNode(true);
   const messageTitle = element.querySelector('.success__message');
 
@@ -65,10 +65,10 @@ function messageSuccess(text) {
   body.appendChild(element);
 
   document.addEventListener('keydown', escapeEvent);
-  messageClose(element);
+  closeMessage(element);
   escapeEvent(element);
 }
 
-export {messageMapError, messageError, messageSuccess};
+export {mapErrorMessage, errorMessage, successMessage};
 
 

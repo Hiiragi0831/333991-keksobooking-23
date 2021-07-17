@@ -1,5 +1,5 @@
 import {sendData} from './api.js';
-import {messageError, messageSuccess} from './modal.js';
+import {errorMessage, successMessage} from './modal.js';
 import {clearForms} from './state-form.js';
 
 const noticeForm = document.querySelector('.ad-form');
@@ -10,10 +10,10 @@ function setUserFormSubmit() {
 
     sendData(
       () => {
-        messageSuccess('Ваше объявление успешно размещено!');
+        successMessage('Ваше объявление успешно размещено!');
         clearForms();
       },
-      () => messageError('Ошибка размещения объявления. Попробуйте ещё раз'),
+      () => errorMessage('Ошибка размещения объявления. Попробуйте ещё раз'),
       new FormData(evt.target),
     );
   });

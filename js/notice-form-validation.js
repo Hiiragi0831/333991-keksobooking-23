@@ -105,6 +105,7 @@ function setMinPrice() {
       minPrice = 10000;
     }
   }
+
   noticeFormType.addEventListener('change', validate);
   validate();
 }

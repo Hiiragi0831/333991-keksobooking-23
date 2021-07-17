@@ -2,7 +2,7 @@ import {debounce} from './utils.js';
 
 const SIMILAR_MARKER_COUNT = 10;
 const formFilter = document.querySelector('.map__filters');
-const buttonFormReset = document.querySelector('.ad-form__reset');
+const resetFormButton = document.querySelector('.ad-form__reset');
 
 function getAdvertisementPriceValue(currentPrice) {
   if (0 < currentPrice && currentPrice < 10000) {
@@ -64,16 +64,16 @@ function renderSimilarList(similarAdvertisement) {
   return array;
 }
 
-function formFilterChange(cb) {
+function formChangeFilter(cb) {
   formFilter.addEventListener('change', debounce(() => {
     cb();
   }));
 }
 
-function buttonFilterReset(cb) {
-  buttonFormReset.addEventListener('click', debounce(() => {
+function resetFilterButton(cb) {
+  resetFormButton.addEventListener('click', debounce(() => {
     cb();
   }));
 }
 
-export {renderSimilarList, formFilterChange, buttonFilterReset};
+export {renderSimilarList, formChangeFilter, resetFilterButton};
