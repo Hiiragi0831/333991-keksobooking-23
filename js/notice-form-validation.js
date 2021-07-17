@@ -17,47 +17,41 @@ const noticeFormType = noticeForm.querySelector('#type');
 
 let minPrice = 0;
 
-// Запрещаем пользователю вводить данные
-function setDisabledAddress () {
+function setDisabledAddress() {
   noticeFormAddress.setAttribute('readonly', 'readonly');
 }
 
-// Валидатор заголовка
-function setValidateTitle () {
+function setValidateTitle() {
   noticeFormTitle.addEventListener('input', () => {
     const valueLength = noticeFormTitle.value.length;
 
     if (valueLength < MIN_NAME_LENGTH) {
-      noticeFormTitle.setCustomValidity(`Ещё ${  MIN_NAME_LENGTH - valueLength } симв.`);
+      noticeFormTitle.setCustomValidity(`Ещё ${MIN_NAME_LENGTH - valueLength} симв.`);
     } else if (valueLength > MAX_NAME_LENGTH) {
-      noticeFormTitle.setCustomValidity(`Удалите лишние ${  valueLength - MAX_NAME_LENGTH } симв.`);
+      noticeFormTitle.setCustomValidity(`Удалите лишние ${valueLength - MAX_NAME_LENGTH} симв.`);
     } else {
       noticeFormTitle.setCustomValidity('');
     }
-
     noticeFormTitle.reportValidity();
   });
 }
 
-
-// Валидатор цены
-function setValidatePrice () {
+function setValidatePrice() {
   noticeFormPrice.addEventListener('input', () => {
     const valueInput = noticeFormPrice.value;
 
     if (valueInput > MAX_PRICE) {
-      noticeFormPrice.setCustomValidity(`Цена не может быть больше ${ MAX_PRICE } руб.`);
+      noticeFormPrice.setCustomValidity(`Цена не может быть больше ${MAX_PRICE} руб.`);
     } else if (valueInput < minPrice) {
-      noticeFormPrice.setCustomValidity(`Цена не может быть меньше ${ minPrice } руб.`);
+      noticeFormPrice.setCustomValidity(`Цена не может быть меньше ${minPrice} руб.`);
     } else {
       noticeFormPrice.setCustomValidity('');
     }
-
     noticeFormPrice.reportValidity();
   });
 }
 
-function setSynchronizationTimeinTimeout () {
+function setSynchronizationTimeinTimeout() {
   noticeFormTimeout.value = noticeFormTimein.value;
   noticeFormTimein.addEventListener('change', () => {
     noticeFormTimeout.value = noticeFormTimein.value;
@@ -67,9 +61,9 @@ function setSynchronizationTimeinTimeout () {
   });
 }
 
-function setSynchronizationRoomCapacity () {
+function setSynchronizationRoomCapacity() {
 
-  function setReport (roomsReport, capacityReport) {
+  function setReport(roomsReport, capacityReport) {
     noticeFormRoomNumber.setCustomValidity(roomsReport);
     noticeFormCapacity.setCustomValidity(capacityReport);
   }
@@ -97,8 +91,8 @@ function setSynchronizationRoomCapacity () {
   setConditionsReview();
 }
 
-function setMinPrice () {
-  function validate () {
+function setMinPrice() {
+  function validate() {
     if (noticeFormType.value === 'bungalow') {
       minPrice = 0;
     } else if (noticeFormType.value === 'flat') {
@@ -115,7 +109,7 @@ function setMinPrice () {
   validate();
 }
 
-function validateForm () {
+function validateForm() {
   setDisabledAddress();
   setValidateTitle();
   setValidatePrice();

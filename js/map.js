@@ -1,5 +1,5 @@
 import {unDisabledFormMapFilters, unDisabledNoticeForms} from './state-form.js';
-import {genereteDomElements} from './dom-generate.js';
+import {generateDomElements} from './dom-generate.js';
 import {getData} from './api.js';
 import {buttonFilterReset, formFilterChange, renderSimilarList} from './similar-list.js';
 import {messageMapError} from './modal.js';
@@ -9,11 +9,12 @@ const buttonFormReset = document.querySelector('.ad-form__reset');
 
 const TOKYO_LAT = 35.68283;
 const TOKYO_LNG = 139.75947;
+const MAP_ZOOM = 12;
 
 const map = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(map);
 
-function createMarker (point) {
+function createMarker(point) {
   const {lat, lng} = point.location;
 
   const icon = L.icon({
@@ -35,14 +36,14 @@ function createMarker (point) {
   marker
     .addTo(markerGroup)
     .bindPopup(
-      genereteDomElements(point),
+      generateDomElements(point),
       {
         keepInView: true,
       },
     );
 }
 
-function addMarkers (points) {
+function addMarkers(points) {
   if (points) {
     points.forEach((point) => {
       createMarker(point);
@@ -50,11 +51,11 @@ function addMarkers (points) {
   }
 }
 
-function clearMarkers () {
+function clearMarkers() {
   markerGroup.clearLayers();
 }
 
-function getMap () {
+function getMap() {
   map.on('load', () => {
     unDisabledNoticeForms();
     getData(
@@ -77,7 +78,7 @@ function getMap () {
   map.setView({
     lat: TOKYO_LAT,
     lng: TOKYO_LNG,
-  }, 12);
+  }, MAP_ZOOM);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -116,7 +117,7 @@ function getMap () {
     map.setView({
       lat: TOKYO_LAT,
       lng: TOKYO_LNG,
-    }, 12);
+    }, MAP_ZOOM);
 
     inputAddress.value = `${TOKYO_LAT}, ${TOKYO_LNG}`;
   });

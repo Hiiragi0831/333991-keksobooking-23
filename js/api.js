@@ -1,4 +1,4 @@
-function getData (onSuccess, onError) {
+function getData(onSuccess, onError) {
   return fetch(
     'https://23.javascript.pages.academy/keksobooking/data',
     {
@@ -11,7 +11,6 @@ function getData (onSuccess, onError) {
         return response.json();
       }
       throw new Error('Не удалось загрузить данные меток');
-      // throw new Error(`${response.status} ${response.statusText}`);
     })
     .then((json) => {
       onSuccess(json);
@@ -21,7 +20,7 @@ function getData (onSuccess, onError) {
     });
 }
 
-function sendData (onSuccess, onError, body) {
+function sendData(onSuccess, onError, body) {
   fetch(
     'https://23.javascript.pages.academy/keksobooking',
     {

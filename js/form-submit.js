@@ -4,7 +4,7 @@ import {clearForms} from './state-form.js';
 
 const noticeForm = document.querySelector('.ad-form');
 
-function setUserFormSubmit () {
+function setUserFormSubmit() {
   noticeForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 

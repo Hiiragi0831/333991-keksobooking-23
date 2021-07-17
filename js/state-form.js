@@ -12,23 +12,25 @@ const mapFilters = document.querySelector('.map__filters');
 const mapFiltersSelects = mapFilters.querySelectorAll('select');
 const mapFiltersInputs = mapFilters.querySelectorAll('input');
 
-function disabledItems (items) {
+function disabledItems(items) {
   for (let i = 0; i < items.length; i++) {
     items[i].disabled = true;
   }
 }
-function unDisabledItems (items) {
+
+function unDisabledItems(items) {
   for (let i = 0; i < items.length; i++) {
     items[i].disabled = false;
   }
 }
-function disabledFormMapFilters () {
+
+function disabledFormMapFilters() {
   mapFilters.classList.add('map__filters--disabled');
   disabledItems(mapFiltersSelects);
   disabledItems(mapFiltersInputs);
 }
 
-function disabledNoticeForms () {
+function disabledNoticeForms() {
   noticeForm.classList.add('ad-form--disabled');
   disabledItems(noticeFormInputs);
   disabledItems(noticeFormSelects);
@@ -36,13 +38,13 @@ function disabledNoticeForms () {
   disabledItems(noticeFormButtons);
 }
 
-function unDisabledFormMapFilters () {
+function unDisabledFormMapFilters() {
   mapFilters.classList.remove('map__filters--disabled');
   unDisabledItems(mapFiltersSelects);
   unDisabledItems(mapFiltersInputs);
 }
 
-function unDisabledNoticeForms () {
+function unDisabledNoticeForms() {
   noticeForm.classList.remove('ad-form--disabled');
   unDisabledItems(noticeFormInputs);
   unDisabledItems(noticeFormSelects);
@@ -51,11 +53,11 @@ function unDisabledNoticeForms () {
   noticeFormAddress.setAttribute('readonly', 'readonly');
 }
 
-function clearForms () {
+function clearForms() {
   document.querySelector('.ad-form__reset').click();
 }
 
-function buttonClearForms () {
+function buttonClearForms() {
   buttonFormReset.addEventListener('click', (evt) => {
     evt.preventDefault();
     noticeForm.reset();
@@ -64,4 +66,11 @@ function buttonClearForms () {
   });
 }
 
-export {clearForms, buttonClearForms, disabledNoticeForms, disabledFormMapFilters, unDisabledFormMapFilters, unDisabledNoticeForms};
+export {
+  clearForms,
+  buttonClearForms,
+  disabledNoticeForms,
+  disabledFormMapFilters,
+  unDisabledFormMapFilters,
+  unDisabledNoticeForms
+};

@@ -4,21 +4,19 @@ const SIMILAR_MARKER_COUNT = 10;
 const formFilter = document.querySelector('.map__filters');
 const buttonFormReset = document.querySelector('.ad-form__reset');
 
-function getAdvertisementPriceValue (currentPrice) {
+function getAdvertisementPriceValue(currentPrice) {
   if (0 < currentPrice && currentPrice < 10000) {
     return 'low';
   }
-
   if (9999 < currentPrice && currentPrice < 50000) {
     return 'middle';
   }
-
   if (49999 < currentPrice) {
     return 'high';
   }
 }
 
-function getMarkerRank (advertisement) {
+function getMarkerRank(advertisement) {
   const housingType = formFilter.querySelector('#housing-type');
   const housingPrice = formFilter.querySelector('#housing-price');
   const housingRooms = formFilter.querySelector('#housing-rooms');
@@ -40,8 +38,9 @@ function getMarkerRank (advertisement) {
   if (advertisement.offer.guests === Number(housingGuests.value)) {
     rank += 1;
   }
+
   for (const selectedFeature of selectedFeatures) {
-    if (advertisement.offer.features && advertisement.offer.features.some( (value) => value === selectedFeature)) {
+    if (advertisement.offer.features && advertisement.offer.features.some((value) => value === selectedFeature)) {
       rank += 1;
     }
   }
@@ -49,14 +48,14 @@ function getMarkerRank (advertisement) {
   return rank;
 }
 
-function compareMarkers (advertisementA, advertisementB) {
+function compareMarkers(advertisementA, advertisementB) {
   const rankA = getMarkerRank(advertisementA);
   const rankB = getMarkerRank(advertisementB);
 
   return rankB - rankA;
 }
 
-function renderSimilarList (similarAdvertisement) {
+function renderSimilarList(similarAdvertisement) {
   let array = similarAdvertisement;
   array = array.slice();
   array = array.sort(compareMarkers);
@@ -65,13 +64,13 @@ function renderSimilarList (similarAdvertisement) {
   return array;
 }
 
-function formFilterChange (cb) {
+function formFilterChange(cb) {
   formFilter.addEventListener('change', debounce(() => {
     cb();
   }));
 }
 
-function buttonFilterReset (cb) {
+function buttonFilterReset(cb) {
   buttonFormReset.addEventListener('click', debounce(() => {
     cb();
   }));

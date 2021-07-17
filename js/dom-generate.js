@@ -9,12 +9,11 @@ const placeTypeMapping = {
   hotel: 'Отель',
 };
 
-function hideElement (element) {
-  element.hidden = true; // normalize.css:78 display none без !important; Соответственно style.css:779 важнее и по этому display: block;
-  element.style.display = 'none'; // задал стиль через js
+function hideElement(element) {
+  element.classList.add('hidden');
 }
 
-function generateImgElements (images) {
+function generateImgElements(images) {
   if (images.length === 0) {
     return false;
   }
@@ -30,7 +29,7 @@ function generateImgElements (images) {
   return image;
 }
 
-function genereteDomElements(offers) {
+function generateDomElements(offers) {
   const element = template.cloneNode(true);
   const popupTitle = element.querySelector('.popup__title');
   const popupTextAddress = element.querySelector('.popup__text--address');
@@ -100,7 +99,8 @@ function genereteDomElements(offers) {
   } else {
     hideElement(popupFeatures);
   }
+
   return element;
 }
 
-export {genereteDomElements};
+export {generateDomElements};
