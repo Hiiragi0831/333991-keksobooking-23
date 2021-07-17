@@ -11,32 +11,20 @@ function removeElement(id) {
   return elem.parentNode.removeChild(elem);
 }
 
-function messageMapError (message) {
+function messageMapError(message) {
   const map = document.querySelector('.map');
   const modal = document.createElement('div');
   const paragraph = document.createElement('p');
 
-  modal.setAttribute('id','modal-error');
+  modal.setAttribute('id', 'modal-error');
   map.appendChild(modal);
   modal.appendChild(paragraph);
-  modal.style.width='100%';
-  modal.style.height='100%';
-  modal.style.background='#353535';
-  modal.style.color='#ffffff';
-  modal.style.textAlign='center';
-  modal.style.position='absolute';
-  modal.style.top='0';
-  modal.style.left='0';
-  modal.style.zIndex='9999';
-  modal.style.display='flex';
-  modal.style.alignItems='center';
-  modal.style.justifyContent='center';
-  modal.style.opacity='0.8';
+  modal.classList.add('map-error');
   paragraph.textContent = message;
-  setTimeout(removeElement,1500, 'modal-error');
+  setTimeout(removeElement, 1500, 'modal-error');
 }
 
-function escapeEvent (element) {
+function escapeEvent(element) {
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
@@ -45,14 +33,14 @@ function escapeEvent (element) {
   }, {once: true});
 }
 
-function messageClose (element) {
+function messageClose(element) {
   element.addEventListener('click', () => {
     element.remove();
   });
   document.removeEventListener('keydown', escapeEvent);
 }
 
-function messageError (text) {
+function messageError(text) {
   const element = errorTemplateClass.cloneNode(true);
   const messageTitle = element.querySelector('.error__message');
   const messageButton = element.querySelector('.error__button');
@@ -69,7 +57,7 @@ function messageError (text) {
   escapeEvent(element);
 }
 
-function messageSuccess (text) {
+function messageSuccess(text) {
   const element = successTemplateClass.cloneNode(true);
   const messageTitle = element.querySelector('.success__message');
 

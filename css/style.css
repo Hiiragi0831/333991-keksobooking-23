@@ -640,7 +640,15 @@ fieldset {
   -webkit-box-shadow: 0 0 2px 2px #ff6547;
           box-shadow: 0 0 2px 2px #ff6547;
 }
-
+.ad-form__file-preview {
+  padding: 0 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
 
 /* Футер
    ========================================================================== */
@@ -1005,6 +1013,32 @@ fieldset {
 .error__button:active {
   outline: none;
   opacity: 0.6;
+}
+
+.map-error {
+  width: 100%;
+  height: 100%;
+  background:#353535;
+  color: #ffffff;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-box-align: center;
+     -ms-flex-align: center;
+        align-items: center;
+
+  -webkit-box-pack: center;
+     -ms-flex-pack: center;
+   justify-content: center;
+
+  opacity: 0.8;
 }
 
 .visually-hidden {
