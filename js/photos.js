@@ -17,8 +17,6 @@ function getFilePreview(fileChooser, preview) {
       const reader = new FileReader();
 
       reader.addEventListener('load', () => {
-        img.width = 40;
-        img.height = 44;
         img.src = String(reader.result);
 
         preview.innerHTML = '';

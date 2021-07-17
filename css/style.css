@@ -640,6 +640,7 @@ fieldset {
   -webkit-box-shadow: 0 0 2px 2px #ff6547;
           box-shadow: 0 0 2px 2px #ff6547;
 }
+
 .ad-form__file-preview {
   padding: 0 15px;
   display: -webkit-box;
@@ -648,6 +649,11 @@ fieldset {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.ad-form__file-preview img {
+  width: 40px;
+  height: 44px;
 }
 
 /* Футер
