@@ -24,7 +24,11 @@ function previewFile(fileChooser, preview) {
     });
 
     reader.readAsDataURL(file);
+    fileChooser.setCustomValidity('');
+  } else {
+    fileChooser.setCustomValidity('Файл должен быть картинкой (jpg, jpeg, png)');
   }
+  fileChooser.reportValidity();
 }
 
 function previewFiles() {

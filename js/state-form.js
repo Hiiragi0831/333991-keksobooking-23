@@ -7,6 +7,9 @@ const noticeFormTextarea = noticeForm.querySelector('#description');
 const noticeFormButtons = noticeForm.querySelectorAll('button');
 const noticeFormAddress = noticeForm.querySelector('#address');
 const buttonFormReset = document.querySelector('.ad-form__reset');
+const noticeFormPrice = noticeForm.querySelector('#price');
+const previewHeader = document.querySelector('.ad-form-header__preview');
+const previewPhoto = document.querySelector('.ad-form__photo');
 
 const mapFilters = document.querySelector('.map__filters');
 const mapFiltersSelects = mapFilters.querySelectorAll('select');
@@ -56,6 +59,13 @@ function unDisabledNoticeForms() {
 function clearForms() {
   document.querySelector('.ad-form__reset').click();
 }
+function defaultPhoto (preview) {
+  const img = document.createElement('img');
+  img.src = 'img/muffin-grey.svg';
+  preview.innerHTML = '';
+  preview.classList.add('ad-form__file-preview');
+  preview.appendChild(img);
+}
 
 function clearFormsButton() {
   buttonFormReset.addEventListener('click', (evt) => {
@@ -63,6 +73,9 @@ function clearFormsButton() {
     noticeForm.reset();
     mapFilters.reset();
     noticeFormAddress.value = `${TOKYO_LAT}, ${TOKYO_LNG}`;
+    defaultPhoto(previewHeader);
+    defaultPhoto(previewPhoto);
+    noticeFormPrice.placeholder = 1000;
   });
 }
 

@@ -313,6 +313,7 @@ fieldset {
   display: -ms-flexbox;
   display: flex;
   width: 150px;
+  position: relative;
 }
 
 .ad-form-header__info {
@@ -333,7 +334,12 @@ fieldset {
 
   cursor: pointer;
 }
-
+.ad-form__input-file {
+  bottom: 0;
+  left: 50%;
+  width: 1px!important;
+  height: 1px!important;
+}
 .ad-form-header__drop-zone:hover {
   color: #ff5635;
 }
@@ -533,6 +539,7 @@ fieldset {
   display: -ms-flexbox;
   display: flex;
   margin-right: 10px;
+  position: relative;
 
   width: 150px;
   min-height: 70px;

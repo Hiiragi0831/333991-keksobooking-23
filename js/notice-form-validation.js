@@ -95,14 +95,19 @@ function setMinPrice() {
   function validate() {
     if (noticeFormType.value === 'bungalow') {
       minPrice = 0;
+      noticeFormPrice.placeholder = 0;
     } else if (noticeFormType.value === 'flat') {
       minPrice = 1000;
+      noticeFormPrice.placeholder = 1000;
     } else if (noticeFormType.value === 'hotel') {
       minPrice = 3000;
+      noticeFormPrice.placeholder = 3000;
     } else if (noticeFormType.value === 'house') {
       minPrice = 5000;
+      noticeFormPrice.placeholder = 5000;
     } else if (noticeFormType.value === 'palace') {
       minPrice = 10000;
+      noticeFormPrice.placeholder = 10000;
     }
   }
 

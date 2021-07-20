@@ -17,10 +17,10 @@ function mapErrorMessage(message) {
   const paragraph = document.createElement('p');
 
   modal.setAttribute('id', 'modal-error');
-  map.appendChild(modal);
-  modal.appendChild(paragraph);
   modal.classList.add('map-error');
   paragraph.textContent = message;
+  map.appendChild(modal);
+  modal.appendChild(paragraph);
   setTimeout(removeElement, 1500, 'modal-error');
 }
 
